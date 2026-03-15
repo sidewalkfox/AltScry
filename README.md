@@ -21,5 +21,7 @@ In verify mode, a user is shown a card that already has alt text written for it.
 By clicking the download button, a CSV file containing every illustration that has had alt text written and verified will be downloaded. The CSV file will include the card name, a unique illustration_id from [Scryfall's Database](https://scryfall.com/), the link to the card art, and the alt text. This information can be used to automatically implement alt text into nearly any program.
 
 ## Future Improvements
+- Walkthrough on first visit
 - Portrait mode support
 - Leaderboard system
+- Admin page for final verifications

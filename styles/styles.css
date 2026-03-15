@@ -156,8 +156,17 @@ button:focus-visible {
 
 #card-text {
   font-size: 16px;
-  margin-bottom: 10px;
+  font-weight: bold;
   color: var(--text-white);
+}
+
+#card-text:hover {
+  text-decoration: underline;
+}
+
+#card-link {
+  margin-bottom: 10px;
+  text-decoration: none;
 }
 
 .card-flip-container {

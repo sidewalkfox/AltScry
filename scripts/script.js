@@ -210,6 +210,13 @@ function handleCardFetchFail() {
 	currentCard.src = cardBackLocation
 }
 
+// Creates a link that brings the user to Scryfall for a specific illustrationID
+function createScryfallLink(illustrationID) {
+	const scryfallLink = `https://scryfall.com/search?q=illustrationid%3A${illustrationID}`
+
+	return scryfallLink
+}
+
 let hasValidIllustrationID;
 // Loads a card that needs alt text written for it
 async function loadContributeCard() {
@@ -219,6 +226,7 @@ async function loadContributeCard() {
 
 		const currentCard = document.getElementById("current-card");
 		const cardNameText = document.getElementById("card-text");
+		const cardScryfallLink = document.getElementById("card-link");
 
 		const altTextBox = document.getElementById("alt-text-box");
 		const submitBtn = document.getElementById("submit-button");
@@ -237,6 +245,9 @@ async function loadContributeCard() {
 			cardNameText.textContent = "No cards to write alt text for!"
 			currentCard.src = cardBackLocation
 
+			// Remove hyperlink from the card text
+			cardScryfallLink.removeAttribute("href")
+
 			// Hide submit buttons and make text box read only
 			submitBtn.style.display = "none";
 			judgeButtons.style.display = "none";
@@ -249,10 +260,13 @@ async function loadContributeCard() {
 			// Make sure submit button is showing
 			submitBtn.style.display = "flex";
 
-			// Show the card name and image
+			// Show the card name, link, and image
 			cardNameText.textContent = image.card_name
 			currentCard.src = image.art_uri;
 			currentCard.dataset.illustration_id = image.illustration_id;
+
+			// Make the card name text a hyperlink to Scryfall
+			cardScryfallLink.href = createScryfallLink(image.illustration_id)
 
 			// Make the text box editable and show the submit button
 			altTextBox.readOnly = false;
@@ -278,6 +292,7 @@ async function loadVerifiedCard() {
 
 		const currentCard = document.getElementById("current-card");
 		const cardNameText = document.getElementById("card-text");
+		const cardScryfallLink = document.getElementById("card-link");
 		const cardAltText = document.getElementById("alt-text-box");
 
 		const altTextBox = document.getElementById("alt-text-box");
@@ -291,6 +306,9 @@ async function loadVerifiedCard() {
 			// If there is no illustrationID, show card back and complete text
 			cardNameText.textContent = "No cards to verify!"
 			currentCard.src = cardBackLocation
+
+			// Remove hyperlink from the card text
+			cardScryfallLink.removeAttribute("href")
 
 			// Hide judge buttons
 			submitBtn.style.display = "none";
@@ -311,6 +329,9 @@ async function loadVerifiedCard() {
 			cardNameText.textContent = image.card_name
 			currentCard.src = image.art_uri;
 			currentCard.dataset.illustration_id = image.illustration_id;
+
+			// Make the card name text a hyperlink to Scryfall
+			cardScryfallLink.href = createScryfallLink(image.illustration_id)
 
 			altTextBox.placeholder = "Write alt text here"
 			cardAltText.value = image.alt_text
