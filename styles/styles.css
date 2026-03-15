@@ -1,0 +1,321 @@
+:root {
+  --background-color: #050505;
+  --smoke-color: #4B0082;
+
+  --border-white: white;
+
+  --alt-text-box: #f0f0f0;
+  --alt-text-box-read-only: #e0e0e0;
+  --text-white: white;
+  --text-black: black;
+  --text-hover: grey;
+
+  --button-hover-white: white;
+
+  --confirm-green: green;
+  --reject-red: red;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-color: transparent;
+}
+
+#canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: var(--background-color);
+  pointer-events: none;
+}
+
+.container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* Banner */
+.banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 7vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  background: none;
+  color: var(--text-white);
+  z-index: 1000;
+}
+
+.switch-buttons {
+  width: 300px;
+  height: 40px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  transition: .3s ease all;
+  border: 1px solid var(--border-white);
+  display: flex;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  color: var(--text-white);
+  border: 1px solid var(--border-white);
+  padding: 6px 12px;
+  transition: 0.3s ease;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--border-white);
+  outline-offset: 2px;
+}
+
+.active {
+  color: var(--text-black);
+  background-color: var(--button-hover-white);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: -1;
+  transition: .3s ease-out all;
+}
+
+.switch-button-contribute,
+.switch-button-verify {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: none;
+  width: 50%;
+  height: 100%;
+  color: var(--text-white);
+  border: none;
+  transition: .3s ease all;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+  padding: 0;
+}
+
+.switch-button-contribute:hover,
+.switch-button-verify:hover {
+  color: var(--text-hover);
+  cursor: pointer;
+}
+
+.active-case {
+  color: var(--text-black);
+}
+
+#download-button {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text-white);
+  font-size: 16px;
+  padding: 4px 10px;
+}
+
+#download-button:hover {
+  background-color: var(--button-hover-white);
+  color: var(--text-black);
+}
+
+/* Left Panel */
+#left-panel {
+  margin-right: 2.5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#card-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--text-white);
+}
+
+.card-flip-container {
+  height: 70vh;
+  width: 30vw;
+  position: relative;
+  perspective: 1200px;
+}
+
+.card-flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.card-front {
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
+
+#current-card {
+  --rotation: 0deg;
+  transition: transform 0.3s ease;
+  transform: rotate(var(--rotation));
+  display: block;
+  max-height: 70vh;
+  width: auto;
+  visibility: hidden;
+}
+
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+}
+
+#reverse-card {
+  --rotation: 0deg;
+  transform: rotate(var(--rotation));
+  display: block;
+  max-height: 70vh;
+  width: auto;
+}
+
+#rotate-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#rotate-button:hover {
+  background-color: var(--button-hover-white);
+  color: var(--text-black);
+}
+
+/* Right Panel */
+#right-panel {
+  margin-left: 2.5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#alt-text-label {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--text-white);
+}
+
+#alt-text-box {
+  width: 350px;
+  max-height: 70vh;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  resize: none;
+  overflow: auto;
+  scrollbar-width: none;
+  box-sizing: border-box;
+}
+
+#alt-text-box::-webkit-scrollbar {
+  display: none;
+}
+
+#alt-text-box:read-only {
+  background-color: var(--alt-text-box-read-only);
+}
+
+.judge-button {
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+  padding: 7px 20px;
+}
+
+#submit-button {
+  display: flex;
+  width: auto;
+}
+
+#submit-button:hover {
+  background-color: var(--button-hover-white);
+  color: var(--text-black);
+}
+
+#judge-button-container {
+  display: none;
+}
+
+#reject-button,
+#confirm-button {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#reject-button:hover {
+  background-color: var(--reject-red);
+}
+
+#confirm-button:hover {
+  background-color: var(--confirm-green);
+}
+
+/* Animations */
+.spin-out {
+  animation: spinOut 1s ease-out forwards;
+}
+
+@keyframes spinOut {
+  0% {
+    transform: rotate(var(--rotation)) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(calc(var(--rotation) + 360deg)) scale(0);
+    opacity: 0;
+  }
+}
+
+.spin-in {
+  animation: spinIn 1s ease-out forwards;
+}
+
+@keyframes spinIn {
+  0% {
+    transform: rotate(calc(var(--rotation) + 360deg)) scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotate(var(--rotation)) scale(1);
+    opacity: 1;
+  }
+
+}

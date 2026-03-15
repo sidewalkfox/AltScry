@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="A crowdsourcing website for the game Magic: The Gathering that allows users to write and verify alt text for card art.">
+
+    <title>AltScry</title>
+
+    <link rel="icon" href="./images/favicon/favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="./images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./images/favicon/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+
+<body>
+
+    <canvas id="canvas"></canvas>
+
+    <div class="container">
+        <div class="banner">
+            <div class="switch-buttons">
+                <span class="active"></span>
+                <button class="switch-button-contribute active-case">Contribute</button>
+                <button class="switch-button-verify">Verify</button>
+            </div>
+
+            <button id="download-button">Download CSV</button>
+        </div>
+
+        <div id="left-panel">
+            <b id="card-text"></b>
+
+            <div class="card-flip-container">
+                <div class="card-flip-inner">
+
+                    <div class="card-front">
+                        <img id="current-card" alt="The front of a Magic card">
+                    </div>
+
+                    <div class="card-back">
+                        <img src="./images/cards/cardBack.png" id="reverse-card"
+                            alt="The back of a Magic card with the AltScry logo">
+                    </div>
+
+                </div>
+            </div>
+
+            <button id="rotate-button" type="button">Rotate 90°</button>
+        </div>
+
+        <div id="right-panel">
+            <b id="alt-text-label">Alt Text:</b>
+            <textarea id="alt-text-box" placeholder="Write alt text here"></textarea>
+
+            <button class="judge-button" id="submit-button" type="button">Skip</button>
+
+            <div id="judge-button-container">
+                <button class="judge-button" id="reject-button" type="button">Reject</button>
+                <button class="judge-button" id="confirm-button" type="button">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="./scripts/smoke.js"></script>
+    <script type="module" src="./scripts/script.js"></script>
+
+</body>
+
+</html>
